@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script>
+        // Función para mostrar el pop-up de confirmación
+        function mostrarPopup() {
+            alert("Registro exitoso!"); // Puedes personalizar esto o usar un modal más elegante
+        }
+        
+        // Llama a la función cuando la página se carga
+        window.onload = function() {
+            if ({{ request.args.get('success')|tojson|safe }}) {
+                mostrarPopup();
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container"> <!-- Un único contenedor para todo -->
+        <header class="top-menu">
+            <div class="logo"> 
+                <img src="{{ url_for('static', filename='images/Logo.PNG') }}" alt="logo" class="logo">
+            </div>
+            <!-- Menú de navegación -->
+            <nav class="main-menu">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+                    <li><a href="{{ url_for('servicios') }}">Servicios</a></li>
+                    <li><a href="{{ url_for('metodologia') }}">Metodología</a></li>
+                    <li><a href="{{ url_for('galeria') }}">Galería</a></li>
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        
+        <nav style="position: relative;">
+            <!-- Otros elementos del menú -->
+            {% if 'usuario_nombre' in session %}
+                <div class="dropdown">
+                    <button class="dropdown-btn">
+                        Usuario: {{ session['usuario_nombre'] }} ▼
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+                    </div>
+                </div>
+            {% endif %}
+        </nav>
+
+        <div class="titulohome">
+            <h2>¡Hola!</h2>
+            <p>Bienvenidos a Rayitos de sol, un lugar donde los niños crecen, aprenden y se divierten en un ambiente seguro y cariñoso. 
+                Nos dedicamos a brindar una educación integral, combinando juegos, creatividad y aprendizaje en cada actividad, para que cada 
+                niño descubra y desarrolle su máximo potencial. Nuestro equipo está comprometido en acompañar a las familias en esta importante 
+                etapa, promoviendo valores y habilidades que perdurarán toda la vida.</p>
+        </div>
+        
+        <div class="photo-grid">
+            <img src="{{ url_for('static', filename='images/home1.jpg') }}" alt="Foto 1">
+            <img src="{{ url_for('static', filename='images/home2.jpg') }}" alt="Foto 2">
+            <img src="{{ url_for('static', filename='images/home3.jpg') }}" alt="Foto 3">
+        </div>
+
+
+        <div class="frase">
+            <h2> "La infancia es la semilla del futuro"</h2>
+            <h3>Gabriela Mistral</h3>
+        </div>
+
+        <footer>
+            <div class="info">
+                <div class="info-item">
+                    <a href="https://maps.app.goo.gl/5K8BdfYtMR7i2sSQ8"</a>
+                    <p class="inline-block">Encuéntranos en <br>Carrera 40# 28 a 38 sur, Bogotá</p>
+                    <img src="{{ url_for('static', filename='images/ubicacion.png') }}" alt="Ubicación"/>
+                </div>
+                <div class="info-item">
+                    <a href="mailto:rayitosdesol@gmail.com"</a>
+                    <p class="inline-block">Contáctanos <br>rayitosdesol@gmail.com</p> 
+                    <img src="{{ url_for('static', filename='images/contactanos.png') }}" alt="Contáctanos"/>
+                </div>    
+            </div>
+
+            <div class="social-media-bar">
+                <a href="https://facebook.com" target="_blank">
+                    <img src="{{ url_for('static', filename='Images/fb.png') }}" alt="Facebook">
+                </a>
+                <a href="https://instagram.com" target="_blank">
+                    <img src="{{ url_for('static', filename='Images/ig.png') }}" alt="Instagram">  
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

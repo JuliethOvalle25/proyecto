@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+    <div class="container"> <!-- Contenedor principal -->
+        <div class="logo"> 
+            <img src="{{ url_for('static', filename='images/Logo.PNG') }}" alt="logo" class="logo">
+        </div>
+
+        <nav class="main-menu">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+                <li><a href="{{ url_for('servicios') }}">Servicios</a></li>
+                <li><a href="{{ url_for('metodologia') }}">Metodología</a></li>
+                <li><a href="{{ url_for('galeria') }}">Galería</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+        </nav>
+
+        <div class="titulogaleria">
+            <h2>Galería</h2>
+            <p>Algunos de los momentos especiales que compartimos en Rayitos de sol. Nuestra galería captura la alegría, curiosidad y entusiasmo
+                 con los que los niños participan en las actividades diarias, desde juegos creativos y exploraciones al aire libre hasta proyectos de arte 
+                 y aprendizaje colaborativo. Cada imagen refleja nuestro compromiso de brindar un ambiente enriquecedor donde los pequeños pueden
+                  aprender y crecer rodeados de cariño y motivación. ¡Acompáñanos en este viaje y descubre la magia de cada día en Rayitos de sol!</p>
+        </div>
+
+        <div class="gallery">
+            <a href="{{ url_for('static', filename='images/home1.jpg') }}" data-lightbox="mygallery" data-title="Rayitos de sol">
+                <img src="{{ url_for('static', filename='images/galeria1') }}" alt="Descripción 1">
+            </a>
+            <a href="{{ url_for('static', filename='images/galeria1') }}" data-lightbox="mygallery" data-title="Rayitos de sol">
+                <img src="{{ url_for('static', filename='images/galeria1') }}" alt="Descripción 2">
+            </a>
+            <a href="{{ url_for('static', filename='images/galeria1') }}" data-lightbox="mygallery" data-title="Rayitos de sol">
+                <img src="{{ url_for('static', filename='images/galeria1') }}" alt="Descripción 3">
+            </a>
+            <a href="{{ url_for('static', filename='images/galeria1') }}" data-lightbox="mygallery" data-title="Rayitos de sol">
+                <img src="{{ url_for('static', filename='images/galeria1') }}" alt="Descripción 4">
+            </a>
+            <a href="{{ url_for('static', filename='images/galeria1') }}" data-lightbox="mygallery" data-title="Rayitos de sol">
+                <img src="{{ url_for('static', filename='images/galeria1') }}" alt="Descripción 5">
+            </a>
+            <a href="{{ url_for('static', filename='images/galeria1') }}" data-lightbox="mygallery" data-title="Rayitos de sol">
+                <img src="{{ url_for('static', filename='images/galeria1') }}" alt="Descripción 6">
+            </a>
+            <a href="{{ url_for('static', filename='images/galeria1') }}" data-lightbox="mygallery" data-title="Rayitos de sol">
+                <img src="{{ url_for('static', filename='images/galeria1') }}" alt="Descripción 7">
+            </a>
+            <a href="{{ url_for('static', filename='images/galeria1') }}" data-lightbox="mygallery" data-title="Rayitos de sol">
+                <img src="{{ url_for('static', filename='images/galeria1') }}" alt="Descripción 8">
+            </a>
+            <a href="{{ url_for('static', filename='images/galeria1') }}" data-lightbox="mygallery" data-title="Rayitos de sol">
+                <img src="{{ url_for('static', filename='images/galeria1') }}" alt="Descripción 8">
+            </a>
+        </div>
+    </div> <!-- Fin del contenedor principal -->
+    
+    <footer>
+        <div class="info">
+            <div class="info-item">
+                <a href="https://maps.app.goo.gl/5K8BdfYtMR7i2sSQ8"</a>
+                <p class="inline-block">Encuéntranos en <br>Carrera 40# 28 a 38 sur, Bogotá</p>
+                <img src="{{ url_for('static', filename='images/ubicacion.png') }}" alt="Ubicación"/>
+            </div>
+            <div class="info-item">
+                <a href="mailto:rayitosdesol@gmail.com"</a>
+                <p class="inline-block">Contáctanos <br>rayitosdesol@gmail.com</p> 
+                <img src="{{ url_for('static', filename='images/contactanos.png') }}" alt="Contáctanos"/>
+            </div>    
+        </div>
+
+        <div class="social-media-bar">
+            <a href="https://facebook.com" target="_blank">
+                <img src="{{ url_for('static', filename='images/fb.png') }}" alt="Facebook">
+            </a>
+            <a href="https://instagram.com" target="_blank">
+                <img src="{{ url_for('static', filename='images/ig.png') }}" alt="Instagram">  
+            </a>
+        </div>
+    </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script> <!-- Agrega Lightbox -->
+</body>
+</html>

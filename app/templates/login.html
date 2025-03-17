@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+    <div class="container"> <!-- Contenedor principal -->
+        <div class="logo"> 
+            <img src="{{ url_for('static', filename='images/Logo.PNG') }}" alt="logo" class="logo">
+        </div>
+
+        <nav class="main-menu">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+                <li><a href="{{ url_for('servicios') }}">Servicios</a></li>
+                <li><a href="{{ url_for('metodologia') }}">Metodología</a></li>
+                <li><a href="{{ url_for('galeria') }}">Galería</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+        </nav>
+
+        <div class="login-container">
+            <form class="login-form" action="{{ url_for('login') }}" method="post">
+                <h2>Iniciar sesión</h2>
+
+
+
+                <div class="input-group">
+                    <label for="username">Username (email)</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="clave" name="clave" required>
+                </div>
+                <button type="submit">Iniciar sesión</button>
+            </form>
+            
+            <!-- Nuevo botón de registro -->
+            <div class="register-link">
+                <p>¿No tienes cuenta?</p>
+                <a href="{{ url_for('registro') }}" class="register-btn">Crear una cuenta</a>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('logout') }}">Cerrar sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        {% if 'usuario_nombre' in session %}
+    <p>Usuario conectado: {{ session['usuario_nombre'] }}</p>
+{% endif %}
+    </div> <!-- Fin del contenedor principal -->
+
+    <footer>
+        <div class="info">
+            <div class="info-item">
+                <a href="https://maps.app.goo.gl/5K8BdfYtMR7i2sSQ8"</a>
+                <p class="inline-block">Encuéntranos en <br>Carrera 40# 28 a 38 sur, Bogotá</p>
+                <img src="{{ url_for('static', filename='images/ubicacion.png') }}" alt="Ubicación"/>
+            </div>
+            <div class="info-item">
+                <a href="mailto:rayitosdesol@gmail.com"</a>
+                <p class="inline-block">Contáctanos <br>rayitosdesol@gmail.com</p> 
+                <img src="{{ url_for('static', filename='images/contactanos.png') }}" alt="Contáctanos"/>
+            </div>    
+        </div>
+        <div class="social-media-bar">
+            <a href="https://facebook.com" target="_blank">
+                <img src="{{ url_for('static', filename='Images/fb.png') }}" alt="Facebook">
+            </a>
+            <a href="https://instagram.com" target="_blank">
+                <img src="{{ url_for('static', filename='Images/ig.png') }}" alt="Instagram">  
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

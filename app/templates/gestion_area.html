@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualización de Tabla</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <div class="container">
+
+    <header class="top-menu">
+        <div class="logo"> 
+            <img src="{{ url_for('static', filename='images/Logo.PNG') }}" alt="logo" class="logo">
+        </div>
+        <!-- Menú de navegación -->
+        <nav class="main-menu">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+                <li><a href="{{ url_for('servicios') }}">Servicios</a></li>
+                <li><a href="{{ url_for('metodologia') }}">Metodología</a></li>
+                <li><a href="{{ url_for('galeria') }}">Galería</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+
+       
+
+        <h1>Gestión de áreas</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    {% for column in columns %}
+                        <th>{{ column }}</th>
+                    {% endfor %}
+                    <th>Acciones</th> <!-- Nueva columna para botones de acción -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                    <tr>
+                        {% for cell in row %}
+                            <td>{{ cell }}</td>
+                        {% endfor %}
+                        <td>
+                            <!-- Botón crear -->
+                            <form action="{{ url_for('crear_area') }}" method="GET" style="display: inline;">
+                                <button class="btn-accion">
+                                    <i class="fas fa-plus"></i> 
+                                </button>
+                            </form>
+                            <!-- Botón Editar -->
+                            <form action="{{ url_for('editar_area', id_area=row[0]) }}" method="GET" style="display: inline;">
+                                <button class="btn-accion">
+                                    <i class="fas fa-edit"></i> 
+                                </button>
+                               
+                            </form>
+                            <!-- Botón Eliminar -->
+                            <form action="{{ url_for('eliminar_area', id_area=row[0]) }}" method="POST" style="display: inline;">
+                                <button class="btn-accion" type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <form method="GET" action="{{ url_for('entidad') }}">
+            <button type="submit" class="btn btn-secondary">Volver atrás</button>
+        </form>
+       
+    
+
+
+    </div>
+
+</div>
+</body>
+</html>

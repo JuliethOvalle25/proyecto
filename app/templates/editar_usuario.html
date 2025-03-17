@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuario</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+    <div class="container">
+        <div class="logo"> 
+            <img src="{{ url_for('static', filename='images/Logo.PNG') }}" alt="logo" class="logo">
+        </div>
+
+        <nav class="main-menu">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('gestion_usuario') }}">Gestión de Usuarios</a></li>
+            </ul>
+        </nav>
+
+        <div class="login-container">
+            <form class="register-form" action="{{ url_for('editar_usuario', id=usuario[0]) }}" method="post">
+                <h2>Editar Usuario</h2>
+
+                <div class="input-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" value="{{ usuario[1] }}" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" name="apellido" value="{{ usuario[2] }}" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="{{ usuario[3] }}" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="rol">Rol</label>
+                    <select id="rol" name="rol" required>
+                        <option value="Empleado" {% if usuario[4] == 'Empleado' %}selected{% endif %}>Empleado</option>
+                        <option value="Administrador" {% if usuario[4] == 'Administrador' %}selected{% endif %}>Administrador</option>
+                    </select>
+                </div>
+
+                <button type="submit">Actualizar</button>
+            </form>
+            <form method="GET" action="{{ url_for('gestion_usuario') }}">
+                <button type="submit" class="btn btn-secondary">Cancelar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

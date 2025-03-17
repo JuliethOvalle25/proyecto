@@ -1,0 +1,19 @@
+<form method="POST">
+    <h3>Área: {{ area['nombre_area'] }}</h3>  <!-- Cambié a usar la clave 'nombre_area' -->
+    
+    <label><input type="checkbox" name="pared" {% if area['pared'] == 1 %}checked{% endif %}> Paredes</label><br>
+    <label><input type="checkbox" name="suelo" {% if area['suelo'] == 1 %}checked{% endif %}> Suelo</label><br>
+    <label><input type="checkbox" name="puerta" {% if area['puerta'] == 1 %}checked{% endif %}> Puerta</label><br>
+    <label><input type="checkbox" name="ventana" {% if area['ventana'] == 1 %}checked{% endif %}> Ventana</label><br>
+    <label><input type="checkbox" name="escritorio" {% if area['escritorio'] == 1 %}checked{% endif %}> Escritorio</label><br>
+    <label><input type="checkbox" name="mesas" {% if area['mesas'] == 1 %}checked{% endif %}> Mesas</label><br>
+    <label><input type="checkbox" name="sillas" {% if area['sillas'] == 1 %}checked{% endif %}> Sillas</label><br>
+    <label><input type="checkbox" name="sanitario" {% if area['sanitario'] == 1 %}checked{% endif %}> Sanitario</label><br>
+    <label><input type="checkbox" name="lavamanos" {% if area['lavamanos'] == 1 %}checked{% endif %}> Lavamanos</label><br>
+    <label><input type="checkbox" name="casa" {% if area['casa'] == 1 %}checked{% endif %}> Casa</label><br>
+    <label><input type="checkbox" name="rodadero" {% if area['rodadero'] == 1 %}checked{% endif %}> Rodadero</label><br>
+    <label><input type="checkbox" name="biblioteca" {% if area['biblioteca'] == 1 %}checked{% endif %}> Biblioteca</label><br>
+    <label><input type="checkbox" name="piscina_pelotas" {% if area['piscina_pelotas'] == 1 %}checked{% endif %}> Piscina de pelotas</label><br>
+
+    <button type="submit">Registrar Estado de Limpieza</button>
+</form>

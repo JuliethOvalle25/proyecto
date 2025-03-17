@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>crear_area</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
+
+</head>
+<body>
+
+    <div class="container">
+    <div class="logo"> 
+        <img src="{{ url_for('static', filename='images/Logo.PNG') }}" alt="logo" class="logo">
+    </div>
+
+    <nav class="main-menu">
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+            <li><a href="{{ url_for('servicios') }}">Servicios</a></li>
+            <li><a href="{{ url_for('metodologia') }}">Metodología</a></li>
+            <li><a href="{{ url_for('galeria') }}">Galería</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+<form method="POST">
+    <label for="nombre-area">Nombre del área:</label>
+    <input type="text" id="nombre_area" name="nombre_area" value="{{ area[1] }}" required>
+
+    <h4>Elementos:</h4>
+    <label><input type="checkbox" name="elementos" value="Pared" {% if 'Pared' in elementos %}checked{% endif %}> Pared</label>
+    <label><input type="checkbox" name="elementos" value="Suelo" {% if 'Suelo' in elementos %}checked{% endif %}> Suelo</label>
+    <label><input type="checkbox" name="elementos" value="Puerta" {% if 'Puerta' in elementos %}checked{% endif %}> Puerta</label>
+    <label><input type="checkbox" name="elementos" value="Ventana" {% if 'Ventana' in elementos %}checked{% endif %}> Ventana</label>
+    <label><input type="checkbox" name="elementos" value="Escritorio" {% if 'Escritorio' in elementos %}checked{% endif %}> Escritorio</label>
+    <label><input type="checkbox" name="elementos" value="Mesas" {% if 'Mesas' in elementos %}checked{% endif %}> Mesas</label>
+    <label><input type="checkbox" name="elementos" value="Sillas" {% if 'Sillas' in elementos %}checked{% endif %}> Sillas</label>
+    <label><input type="checkbox" name="elementos" value="Sanitario" {% if 'Sanitario' in elementos %}checked{% endif %}> Sanitario</label>
+    <label><input type="checkbox" name="elementos" value="Lavamanos" {% if 'Lavamanos' in elementos %}checked{% endif %}> Lavamanos</label>
+    <label><input type="checkbox" name="elementos" value="Casa" {% if 'Casa' in elementos %}checked{% endif %}> Casa</label>
+    <label><input type="checkbox" name="elementos" value="Rodadero" {% if 'Rodadero' in elementos %}checked{% endif %}> Rodadero</label>
+    <label><input type="checkbox" name="elementos" value="Biblioteca" {% if 'Biblioteca' in elementos %}checked{% endif %}> Biblioteca</label>
+    <label><input type="checkbox" name="elementos" value="Piscina pelotas" {% if 'Piscina pelotas' in elementos %}checked{% endif %}> Piscina pelotas</label>
+
+   
+    <!-- Agregar más checkboxes de manera similar -->
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+</form>    
+
+<form method="GET" action="{{ url_for('gestion_area') }}">
+    <button type="submit" class="btn btn-secondary">Cancelar</button>
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

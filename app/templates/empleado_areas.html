@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Limpieza</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+<div class="container"> <!-- Contenedor principal -->
+    <div class="logo"> 
+        <img src="{{ url_for('static', filename='images/Logo.PNG') }}" alt="logo" class="logo">
+    </div>
+
+    <nav class="main-menu">
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+        </ul>
+    </nav>
+
+    <h1>Registro de Limpieza</h1>
+
+    <form method="GET" id="areaForm"> <!-- Formulario para seleccionar área -->
+        <!-- Responsable -->
+        <label for="responsable">Responsable:</label>
+        <input type="text" name="responsable" id="responsable" value="{{ usuario_nombre }}" readonly>
+    
+        <!-- Fecha -->
+        <label for="fecha">Fecha:</label>
+        <input type="text" id="fecha" value="{{ fecha }}" readonly>
+    
+        <!-- Selección de Área -->
+        <label for="area">Área:</label>
+        <select name="id_area" id="area" onchange="document.getElementById('areaForm').submit();">
+            <option value="">Seleccione un área</option>
+            {% for id_area, nombre_area in areas %}
+            <option value="{{ id_area }}" {% if request.args.get('id_area')|int == id_area %}selected{% endif %}>
+                {{ nombre_area }}
+            </option>
+            {% endfor %}
+        </select>
+    </form>
+
+    {% if elementos %}
+    <form method="POST"> <!-- Formulario para registrar limpieza -->
+        <!-- Campo oculto para enviar el área seleccionada -->
+        <input type="hidden" name="id_area" value="{{ request.args.get('id_area')|int }}">
+
+        <!-- Tabla de Elementos -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Elemento</th>
+                    <th>¿Limpieza Realizada?</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for elemento, valor in elementos.items() %}
+                <tr>
+                    <td>{{ elemento }}</td>
+                    <td>
+                        <input type="checkbox" name="fue_limpio[]" value="{{ elemento }}" {% if valor %}checked{% endif %}>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+        <!-- Observaciones -->
+        <label for="observaciones">Observaciones:</label>
+        <textarea name="observaciones" id="observaciones"></textarea>
+    
+        <button type="submit">Guardar</button>
+    </form>
+    {% else %}
+    <p>No hay elementos disponibles para esta área.</p>
+    {% endif %}
+</div>
+</body>
+</html>

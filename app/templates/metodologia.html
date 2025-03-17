@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metodología</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+    <div class="container"> <!-- Contenedor principal -->
+        <div class="logo"> 
+            <img src="{{ url_for('static', filename='images/Logo.PNG') }}" alt="logo" class="logo">
+        </div>
+
+        <nav class="main-menu">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+                <li><a href="{{ url_for('servicios') }}">Servicios</a></li>
+                <li><a href="{{ url_for('metodologia') }}">Metodología</a></li>
+                <li><a href="{{ url_for('galeria') }}">Galería</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+        </nav>
+
+        <div class="titulometodologia">
+            <h2>Metodología</h2>
+            <p>En Rayitos de sol, nuestra metodología de enseñanza se basa en un enfoque integral que promueve el aprendizaje activo, 
+                la curiosidad y la autonomía de cada niño. Creemos que los primeros años son fundamentales para el desarrollo de habilidades sociales,
+                emocionales y cognitivas, por lo que nuestras actividades están diseñadas para estimular tanto la creatividad como el pensamiento crítico.
+                Nuestro enfoque se apoya en métodos de enseñanza innovadores, como el aprendizaje basado en el juego,
+                el trabajo en proyectos y la exploración sensorial.</p>
+        </div>
+
+        <section>
+            <div>
+                <img src="{{ url_for('static', filename='images/metodologia-1.jpg') }}" alt="Imagen1">
+                <h2>Aprendizaje a través del juego</h2>
+                <p>Ofrecemos un programa educativo integral que abarca el desarrollo cognitivo, emocional, social y físico de cada niño, utilizando métodos pedagógicos modernos y centrados en el aprendizaje a través del juego.</p>
+            </div>
+ 
+            <div>
+                <img src="{{ url_for('static', filename='images/metodologia-2.jpg') }}" alt="Imagen2">
+                <h2>Enfoque Montessori</h2>
+                <p>Adoptamos elementos del enfoque Montessori, donde los niños tienen libertad para elegir sus actividades dentro de un entorno preparado. Esto promueve la independencia, la toma de decisiones y el desarrollo de habilidades prácticas.</p>
+            </div>
+ 
+            <div>
+                <img src="{{ url_for('static', filename='images/metodologia-3.jpg') }}" alt="Imagen3">
+                <h2>Aprendizaje Basado en Proyectos</h2>
+                <p>Utilizamos proyectos temáticos que integran diversas áreas del conocimiento. Los niños participan en proyectos que les permiten explorar y aprender sobre temas de su interés, desarrollando habilidades de investigación y resolución de problemas.</p>
+            </div>
+        </section>
+    </div> <!-- Fin del contenedor principal -->
+
+    <footer>
+        <div class="info">
+            <div class="info-item">
+                <p class="inline-block">Encuéntranos en <br>Cra. 75 #24d-19, Bogotá</p>
+                <img src="{{ url_for('static', filename='images/ubicacion.png') }}"/>
+            </div>
+            <div class="info-item">
+                <p class="inline-block">Contáctanos <br>info@rayitosdesol.com</p> 
+                <img src="{{ url_for('static', filename='images/contactanos.png') }}"/>
+            </div>    
+        </div>
+
+        <div class="social-media-bar">
+            <a href="https://facebook.com" target="_blank">
+                <img src="{{ url_for('static', filename='images/fb.png') }}" alt="Facebook">
+            </a>
+            <a href="https://instagram.com" target="_blank">
+                <img src="{{ url_for('static', filename='images/ig.png') }}" alt="Instagram">  
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Áreas - Administrador</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+<body>
+    <h1>Gestión de Áreas</h1>
+
+    <!-- Dropdown para seleccionar rol -->
+    <div class="dropdown">
+        <button class="dropdown-button">Rol: Administrador</button>
+        <div class="dropdown-content">
+            <a href="{{ url_for('entidad') }}">Administrador</a>
+            <a href="{{ url_for('lista_areas_empleado') }}">Empleado</a>
+        </div>
+    </div>
+
+    <!-- Botón para agregar nueva área -->
+    <div>
+        <a href="{{ url_for('crear_area') }}" class="btn-agregar">+ Agregar Nueva Área</a>
+    </div>
+
+    <!-- Tabla para mostrar las áreas -->
+    <table class="tabla-areas">
+        <thead>
+            <tr>
+                <th>Nombre del Área</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for area in areas %}
+            <tr>
+                <td>{{ area.nombre_area }}</td>
+                <td>
+                    <a href="{{ url_for('editar_area', id_area=area.id_area) }}" class="btn-editar">Editar</a>
+                    <a href="{{ url_for('eliminar_area', id_area=area.id_area) }}" class="btn-eliminar" onclick="return confirm('¿Estás seguro de eliminar esta área?');">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

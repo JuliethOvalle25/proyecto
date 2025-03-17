@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>crear_area</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
+
+</head>
+<body>
+
+    <div class="container">
+    <div class="logo"> 
+        <img src="{{ url_for('static', filename='images/Logo.PNG') }}" alt="logo" class="logo">
+    </div>
+
+    <nav class="main-menu">
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+            <li><a href="{{ url_for('servicios') }}">Servicios</a></li>
+            <li><a href="{{ url_for('metodologia') }}">Metodología</a></li>
+            <li><a href="{{ url_for('galeria') }}">Galería</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <form id="area-form" method="POST" action="{{ url_for('crear_area') }}">
+        <h2>Crear nueva área</h2>
+            <label for="nombre-area">Ingrese el nombre del área</label>
+            <input type="text" id="nombre-area" name="nombre-area" placeholder="" required>
+
+            <h3>Seleccione uno o varios elementos:</h3>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="elementos" value="Pared"> Pared</label>
+                <label><input type="checkbox" name="elementos" value="Suelo"> Suelo</label>
+                <label><input type="checkbox" name="elementos" value="Puerta"> Puerta</label>
+                <label><input type="checkbox" name="elementos" value="Ventana"> Ventana</label>
+                <label><input type="checkbox" name="elementos" value="Escritorio"> Escritorio</label>
+                <label><input type="checkbox" name="elementos" value="Mesas"> Mesas</label>
+                <label><input type="checkbox" name="elementos" value="Sillas"> Sillas</label>
+                <label><input type="checkbox" name="elementos" value="Sanitario"> Sanitario</label>
+                <label><input type="checkbox" name="elementos" value="Lavamanos"> Lavamanos</label>
+                <label><input type="checkbox" name="elementos" value="Casa"> Casa</label>
+                <label><input type="checkbox" name="elementos" value="Rodadero"> Rodadero</label>
+                <label><input type="checkbox" name="elementos" value="Biblioteca"> Biblioteca</label>
+                <label><input type="checkbox" name="elementos" value="Piscina pelotas"> Piscina pelotas</label>
+            </div>
+
+            <input type="submit" value="Guardar área">
+        </form>
+
+        <form method="GET" action="{{ url_for('gestion_area') }}">
+            <button type="submit" class="btn btn-secondary">Cancelar</button>
+        </form>
+    
+</body>
+</html>

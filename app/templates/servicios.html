@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+    <div class="container"> <!-- Contenedor principal -->
+        <div class="logo"> 
+            <img src="{{ url_for('static', filename='images/Logo.PNG') }}" alt="logo" class="logo">
+        </div>
+
+        <nav class="main-menu">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+                <li><a href="{{ url_for('servicios') }}">Servicios</a></li>
+                <li><a href="{{ url_for('metodologia') }}">Metodología</a></li>
+                <li><a href="{{ url_for('galeria') }}">Galería</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+        </nav>
+
+        <div class="tituloservicios">
+            <h2>Servicios</h2>
+            <p>En Rayitos de sol, ofrecemos servicios diseñados para fomentar el desarrollo integral de los
+                más pequeños en un ambiente seguro y estimulante. Nuestro equipo de educadores y profesionales se dedica 
+                a proporcionar actividades y cuidados de alta calidad, adaptados a las necesidades de cada etapa de crecimiento.
+                Nos esforzamos en crear experiencias enriquecedoras que impulsen el aprendizaje, la creatividad y el bienestar de
+                todos nuestros niños.</p>
+        </div>
+
+        <section>
+            <div>
+                <img src="{{ url_for('static', filename='images/servicios-1.jpg') }}" alt="Imagen1">
+                <h4>Educación Integral</h4>
+                <p>Ofrecemos un programa educativo integral que abarca el desarrollo cognitivo, emocional, social y físico de cada niño, utilizando métodos pedagógicos modernos y centrados en el aprendizaje a través del juego.</p>
+            </div>
+  
+            <div>
+                <img src="{{ url_for('static', filename='images/servicios-2.jpg') }}" alt="Imagen2">
+                <h4>Actividades Extracurriculares</h4>
+                <p>Organizamos actividades variadas, como música, arte, danza y deportes, que fomentan la creatividad y el desarrollo de habilidades físicas y sociales.</p>
+            </div>
+  
+            <div>
+                <img src="{{ url_for('static', filename='images/servicios-3.jpg') }}" alt="Imagen3">
+                <h4>Alimentación Saludable</h4>
+                <p>Ofrecemos menús balanceados y nutritivos, diseñados para promover hábitos alimenticios saludables desde una edad temprana.</p>
+            </div>
+        </section>
+    </div> <!-- Fin del contenedor principal -->
+
+    <footer>
+        <div class="info">
+            <div class="info-item">
+                <p class="inline-block">Encuéntranos en <br>Cra. 75 #24d-19, Bogotá</p>
+                <img src="{{ url_for('static', filename='images/ubicacion.png') }}"/>
+            </div>
+            <div class="info-item">
+                <p class="inline-block">Contáctanos <br>info@rayitosdesol.com</p> 
+                <img src="{{ url_for('static', filename='images/contactanos.png') }}"/>
+            </div>    
+        </div>
+
+        <div class="social-media-bar">
+            <a href="https://facebook.com" target="_blank">
+                <img src="{{ url_for('static', filename='images/fb.png') }}" alt="Facebook">
+            </a>
+            <a href="https://instagram.com" target="_blank">
+                <img src="{{ url_for('static', filename='images/ig.png') }}" alt="Instagram">  
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>crear_area</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
+
+</head>
+
+<div class="container">
+
+    <div class="dropdown">
+        <button class="dropbtn" onclick="window.location.href='{{ url_for('entidad') }}';">
+            Administración
+        </button>
+    </div>
+
+
+<body>
+    <h1>Reportes de Limpieza</h1>
+
+    <!-- Formulario de Filtros -->
+    <form method="GET" action="{{ url_for('reportes') }}">
+       
+        <label for="fecha_inicio">Fecha inicio:</label>
+        <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{ request.args.get('fecha_inicio', '') }}">
+        
+        <label for="fecha_fin">Fecha fin:</label>
+        <input type="date" id="fecha_fin" name="fecha_fin" value="{{ request.args.get('fecha_fin', '') }}">
+        
+        <label for="responsable">Responsable:</label>
+        <input type="text" id="responsable" name="responsable" value="{{ request.args.get('responsable', '') }}">
+        
+        <label for="area">Área:</label>
+        <input type="text" id="area" name="area" value="{{ request.args.get('area', '') }}">
+
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <hr>
+
+    <!-- Mostrar Reportes Agrupados -->
+    {% for fecha, reportes in reportes_agrupados.items() %}
+    
+
+            <a href="{{ url_for('generar_pdf', fecha=fecha) }}" class="generate-pdf">Generar PDF</a>
+
+        </div>
+
+       
+        <table>
+            <thead>
+                <tr>
+                    <th>Área</th>
+                    <th>Responsable</th>
+                    <th>Elemento</th>
+                    <th>¿Fue Limpio?</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reporte in reportes %}
+                    <tr>
+                        <td>{{ reporte[2] }}</td> <!-- Nombre del área -->
+                        <td>{{ reporte[3] }}</td> <!-- Responsable -->
+                        <td>{{ reporte[4] }}</td> <!-- Elemento -->
+                        <td>{{ 'Sí' if reporte[5] == 1 else 'No' }}</td> <!-- Fue limpio -->
+                        <td>{{ reporte[6] }}</td> <!-- Observaciones -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+  
+    {% endfor %}
+
+
+</body>
+</html>
+ 
