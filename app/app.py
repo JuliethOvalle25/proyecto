@@ -10,7 +10,8 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image
 from reportlab.lib.styles import getSampleStyleSheet
-from utils import obtener_conexion
+from app.utils import obtener_conexion
+app = Flask(__name__) 
 
 
 
