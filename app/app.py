@@ -10,6 +10,8 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image
 from reportlab.lib.styles import getSampleStyleSheet
+from app.utils import obtener_conexion
+app = Flask(__name__) 
 
 
 
@@ -60,7 +62,6 @@ app.secret_key = 'mi_clave_secreta_segura'
 dsn = "localhost:1521/xe"
 usuario = "sys"
 contraseña = "123"
-
 def obtener_conexion():
     try:
         # Establecer conexión con la base de datos Oracle
