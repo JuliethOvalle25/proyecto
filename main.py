@@ -58,14 +58,14 @@ def obtener_areas(cursor):
 
 
 # Configuración conexión a base de datos rayitos
-dsn = oracledb.makedsn("190.26.141.106", 1521, service_name="XE")
+dsn = oracledb.makedsn("192.168.5.115", 1521, service_name="XE")
 conexion = oracledb.connect(user="sys", password="123", dsn=dsn, mode=oracledb.AUTH_MODE_SYSDBA)
 
 
 def obtener_conexion():
     try:
         
-        dsn = oracledb.makedsn("190.26.141.106", 1521, service_name="XE")
+        dsn = oracledb.makedsn("192.168.5.115", 1521, service_name="XE")
         # Establecer conexión con la base de datos Oracle
         connection = oracledb.connect(
             user="sys",                 # Nombre de usuario
