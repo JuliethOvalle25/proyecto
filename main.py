@@ -14,7 +14,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 
 
 # Crear la aplicación Flask
-app = Flask(__name__, template_folder="app/templates")
+app = Flask(__name__, template_folder="app/templates", static_folder='static', template_folder='templates')
 # Clave secreta     
 app.secret_key = 'mi_clave_secreta_segura'
 
@@ -58,17 +58,19 @@ def obtener_areas(cursor):
 
 
 # Configuración conexión a base de datos rayitos
-dsn = "localhost:1521/xe"
-usuario = "sys"
-contraseña = "123"
+dsn = oracledb.makedsn("190.26.141.106", 1521, service_name="XE")
+conexion = oracledb.connect(user="sys", password="123", dsn=dsn, mode=oracledb.AUTH_MODE_SYSDBA)
+
 
 def obtener_conexion():
     try:
+        
+        dsn = oracledb.makedsn("190.26.141.106", 1521, service_name="XE")
         # Establecer conexión con la base de datos Oracle
         connection = oracledb.connect(
             user="sys",                 # Nombre de usuario
             password="123",             # contraseña
-            dsn="190.26.141.106",    # cadena de conexión
+            dsn=dsn,    # cadena de conexión
             mode=oracledb.AUTH_MODE_SYSDBA  # Incluir por que uso  SYS
         )
         print("Conexión exitosa a la base de datos.")
