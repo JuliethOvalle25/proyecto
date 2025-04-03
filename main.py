@@ -14,7 +14,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 
 
 # Crear la aplicación Flask
-app = Flask(__name__, template_folder="app/templates", static_folder='static', template_folder='templates')
+app = Flask(__name__, template_folder="app/templates", static_folder="app/static")
 # Clave secreta     
 app.secret_key = 'mi_clave_secreta_segura'
 
