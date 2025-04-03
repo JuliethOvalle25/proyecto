@@ -65,7 +65,7 @@ conexion = oracledb.connect(user="sys", password="123", dsn=dsn, mode=oracledb.A
 def obtener_conexion():
     try:
         
-        dsn = oracledb.makedsn("192.168.5.110", 1521, service_name="XE")
+        dsn = oracledb.makedsn("192.168.5.115", 1521, service_name="XE")
         # Establecer conexión con la base de datos Oracle
         connection = oracledb.connect(
             user="sys",                 # Nombre de usuario
