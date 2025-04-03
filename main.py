@@ -13,7 +13,10 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, 
 from reportlab.lib.styles import getSampleStyleSheet
 
 
-
+# Crear la aplicación Flask
+app = Flask(__name__)
+# Clave secreta     
+app.secret_key = 'mi_clave_secreta_segura'
 
 
 # Definir función de sesion como administrador 
@@ -51,10 +54,7 @@ def obtener_areas(cursor):
         return []
 
 
-# Crear la aplicación Flask
-app = Flask(__name__)
-# Clave secreta     
-app.secret_key = 'mi_clave_secreta_segura'
+
 
 
 # Configuración conexión a base de datos rayitos
@@ -68,7 +68,7 @@ def obtener_conexion():
         connection = oracledb.connect(
             user="sys",                 # Nombre de usuario
             password="123",             # contraseña
-            dsn="localhost:1521/xe",    # cadena de conexión
+            dsn="190.26.141.106",    # cadena de conexión
             mode=oracledb.AUTH_MODE_SYSDBA  # Incluir por que uso  SYS
         )
         print("Conexión exitosa a la base de datos.")
