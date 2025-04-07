@@ -11,6 +11,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image
 from reportlab.lib.styles import getSampleStyleSheet
+import os
 
 
 # Crear la aplicación Flask
@@ -54,23 +55,17 @@ def obtener_areas(cursor):
         return []
 
 
-
-
-
-# Configuración conexión a base de datos rayitos
-dsn = oracledb.makedsn("192.168.5.115", 1521, service_name="XE")
-conexion = oracledb.connect(user="sys", password="123", dsn=dsn, mode=oracledb.AUTH_MODE_SYSDBA)
+oracledb.init_oracle_client(config_dir=os.path.join("app", "wallet"))
 
 
 def obtener_conexion():
     try:
         
-        dsn = oracledb.makedsn("192.168.5.115", 1521, service_name="XE")
         # Establecer conexión con la base de datos Oracle
         connection = oracledb.connect(
             user="sys",                 # Nombre de usuario
             password="123",             # contraseña
-            dsn=dsn,    # cadena de conexión
+            dsn="CN=adb.sa-bogota-1.oraclecloud.com",    # cadena de conexión
             mode=oracledb.AUTH_MODE_SYSDBA  # Incluir por que uso  SYS
         )
         print("Conexión exitosa a la base de datos.")
