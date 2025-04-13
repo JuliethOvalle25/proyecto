@@ -15,7 +15,8 @@ import os
 
 
 # Crear la aplicación Flask
-app = Flask(__name__)
+
+app = Flask(__name__, template_folder="app/templates", static_folder="app/static")
 # Clave secreta     
 app.secret_key = 'mi_clave_secreta_segura'
 
