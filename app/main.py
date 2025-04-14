@@ -11,6 +11,9 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, 
 from reportlab.lib.styles import getSampleStyleSheet
 import os
 import psycopg2
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Crear la aplicación Flask
 
