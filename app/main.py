@@ -129,9 +129,43 @@ def entidad_admin():
 ## FUNCIONALIDAD DE LA PÁGINA
 
    
+
+   
+   # 1. Inicio de sesión y registro
    
    
-   # 1. Inicio de sesión
+@app.route('/registro', methods=['GET', 'POST'])
+def registro():
+    if request.method == 'POST':
+        nombre = request.form.get('nombre')
+        apellido = request.form.get('apellido')
+        email = request.form.get('email')
+        clave = request.form.get('clave')
+        rol = request.form.get('rol')
+
+        if not all([nombre, apellido, email, clave, rol]):
+            return render_template('registro.html', error="Todos los campos son obligatorios.")
+
+        connection = obtener_conexion()
+        cursor = connection.cursor()
+        try:
+            cursor.execute("""
+                INSERT INTO usuarios (nombre, apellido, email, clave, rol)
+                VALUES (%s, %s, %s, %s, %s)
+            """, (nombre, apellido, email, clave, rol))
+            connection.commit()
+            flash("Registro exitoso. Ya puedes iniciar sesión.", "success")
+            return redirect(url_for('login'))
+        except Exception as e:
+            flash(f"Error al registrar: {e}", "danger")
+        finally:
+            cursor.close()
+            connection.close()
+    return render_template('registro.html')
+   
+   
+   
+   
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'usuario_nombre' in session:
@@ -538,6 +572,8 @@ def editar_usuario(id):
             cursor.close()
             connection.close()
         return redirect(url_for('gestion_usuario'))
+    
+    
 
 ## CREACION DE TABLAS EN POSTGREESQL
 
