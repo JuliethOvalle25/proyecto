@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
 
     <header class="top-menu">
         <div class="logo"> 
@@ -30,59 +30,66 @@
     </header>
 
     <div class="container">
-
-       
-
         <h1>Gestión de áreas</h1>
-        <table border="1">
-            <thead>
-                <tr>
-                    {% for column in columns %}
-                        <th>{{ column }}</th>
-                    {% endfor %}
-                    <th>Acciones</th> <!-- Nueva columna para botones de acción -->
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in rows %}
+
+        <div class="responsive-table">
+            <table border="1">
+                <thead>
                     <tr>
-                        {% for cell in row %}
-                            <td>{{ cell }}</td>
+                        {% for column in columns %}
+                            <th>{{ column }}</th>
                         {% endfor %}
-                        <td>
-                            <!-- Botón crear -->
-                            <form action="{{ url_for('crear_area') }}" method="GET" style="display: inline;">
-                                <button class="btn-accion">
-                                    crear
-                                </button>
-                            </form>
-                            <!-- Botón Editar -->
-                            <form action="{{ url_for('editar_area', id_area=row[0]) }}" method="GET" style="display: inline;">
-                                <button class="btn-accion">
-                                    editar 
-                                </button>
-                               
-                            </form>
-                            <!-- Botón Eliminar -->
-                            <form action="{{ url_for('eliminar_area', id_area=row[0]) }}" method="POST" style="display: inline;">
-                                <button class="btn-accion" type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
-                                    eliminar
-                                </button>
-                            
-                            </form>
-                        </td>
+                        <th>Acciones</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            {% for cell in row %}
+                                <td>{{ cell }}</td>
+                            {% endfor %}
+                            <td>
+                                <!-- Botón Crear -->
+                                <form action="{{ url_for('crear_area') }}" method="GET" style="display: inline;">
+                                    <button class="btn-accion" title="Crear nueva área">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </form>
+
+                                <!-- Botón Editar -->
+                                <form action="{{ url_for('editar_area', id_area=row[0]) }}" method="GET" style="display: inline;">
+                                    <button class="btn-accion" title="Editar área">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </form>
+
+                                <!-- Botón Eliminar -->
+                                <form action="{{ url_for('eliminar_area', id_area=row[0]) }}" method="POST" style="display: inline;">
+                                    <button class="btn-accion" type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar esta área?');" title="Eliminar área">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    {% if not rows %}
+                        <tr>
+                            <td colspan="{{ columns|length + 1 }}" style="text-align:center; padding: 20px;">
+                                No hay áreas registradas aún.<br><br>
+                                <form action="{{ url_for('crear_area') }}" method="GET">
+                                    <button class="btn-accion">Crear nueva área</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
 
         <form method="GET" action="{{ url_for('entidad') }}">
             <button type="submit" class="btn btn-secondary">Volver atrás</button>
         </form>
-       
-    
-
-
     </div>
 
 </div>
