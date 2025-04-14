@@ -53,20 +53,20 @@
                             <!-- Botón crear -->
                             <form action="{{ url_for('crear_area') }}" method="GET" style="display: inline;">
                                 <button class="btn-accion">
-                                    <i class="fas fa-plus"></i> 
+                                    crear
                                 </button>
                             </form>
                             <!-- Botón Editar -->
                             <form action="{{ url_for('editar_area', id_area=row[0]) }}" method="GET" style="display: inline;">
                                 <button class="btn-accion">
-                                    <i class="fas fa-edit"></i> 
+                                    editar 
                                 </button>
                                
                             </form>
                             <!-- Botón Eliminar -->
                             <form action="{{ url_for('eliminar_area', id_area=row[0]) }}" method="POST" style="display: inline;">
                                 <button class="btn-accion" type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
-                                    <i class="fas fa-trash-alt"></i>
+                                    eliminar
                                 </button>
                             
                             </form>
