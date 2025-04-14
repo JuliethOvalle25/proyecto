@@ -14,6 +14,8 @@ import psycopg2
 from dotenv import load_dotenv
 
 load_dotenv()
+print("✅ DB_HOST cargado:", os.environ.get("DB_HOST"))
+
 
 # Crear la aplicación Flask
 
