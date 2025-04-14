@@ -240,28 +240,33 @@ def crear_area():
 def gestion_area():
     connection = obtener_conexion()
     cursor = connection.cursor()
+
     cursor.execute("""
         SELECT id_area, nombre_area,
-            CASE WHEN pared = 1 THEN 'Si' ELSE NULL END,
-            CASE WHEN suelo = 1 THEN 'Si' ELSE NULL END,
-            CASE WHEN puerta = 1 THEN 'Si' ELSE NULL END,
-            CASE WHEN ventana = 1 THEN 'Si' ELSE NULL END,
-            CASE WHEN escritorio = 1 THEN 'Si' ELSE NULL END,
-            CASE WHEN mesas = 1 THEN 'Si' ELSE NULL END,
-            CASE WHEN sillas = 1 THEN 'Si' ELSE NULL END,
-            CASE WHEN sanitario = 1 THEN 'Si' ELSE NULL END,
-            CASE WHEN lavamanos = 1 THEN 'Si' ELSE NULL END,
-            CASE WHEN casa = 1 THEN 'Si' ELSE NULL END,
-            CASE WHEN rodadero = 1 THEN 'Si' ELSE NULL END,
-            CASE WHEN biblioteca = 1 THEN 'Si' ELSE NULL END,
-            CASE WHEN piscina_pelotas = 1 THEN 'Si' ELSE NULL END
+            CASE WHEN pared = 1 THEN 'Si' ELSE NULL END AS pared,
+            CASE WHEN suelo = 1 THEN 'Si' ELSE NULL END AS suelo,
+            CASE WHEN puerta = 1 THEN 'Si' ELSE NULL END AS puerta,
+            CASE WHEN ventana = 1 THEN 'Si' ELSE NULL END AS ventana,
+            CASE WHEN escritorio = 1 THEN 'Si' ELSE NULL END AS escritorio,
+            CASE WHEN mesas = 1 THEN 'Si' ELSE NULL END AS mesas,
+            CASE WHEN sillas = 1 THEN 'Si' ELSE NULL END AS sillas,
+            CASE WHEN sanitario = 1 THEN 'Si' ELSE NULL END AS sanitario,
+            CASE WHEN lavamanos = 1 THEN 'Si' ELSE NULL END AS lavamanos,
+            CASE WHEN casa = 1 THEN 'Si' ELSE NULL END AS casa,
+            CASE WHEN rodadero = 1 THEN 'Si' ELSE NULL END AS rodadero,
+            CASE WHEN biblioteca = 1 THEN 'Si' ELSE NULL END AS biblioteca,
+            CASE WHEN piscina_pelotas = 1 THEN 'Si' ELSE NULL END AS piscina_pelotas
         FROM area
     """)
-    columns = [col[0] for col in cursor.description]
+
+    columns = [desc[0] for desc in cursor.description]  # nombres de columnas correctos
     rows = cursor.fetchall()
+
     cursor.close()
     connection.close()
+
     return render_template('gestion_area.html', columns=columns, rows=rows)
+
 
 @app.route('/eliminar_area/<int:id_area>', methods=['POST'])
 def eliminar_area(id_area):
