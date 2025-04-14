@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 import datetime
-from datetime import date
+from datetime import datetime
 from flask import Response
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
