@@ -12,13 +12,32 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image
 from reportlab.lib.styles import getSampleStyleSheet
 import os
-
+import psycopg2
 
 # Crear la aplicación Flask
 
 app = Flask(__name__, template_folder="app/templates", static_folder="app/static")
 # Clave secreta     
 app.secret_key = 'mi_clave_secreta_segura'
+
+
+
+
+def obtener_conexion():
+    try:
+        return psycopg2.connect(
+            dbname="rayitos",
+            user=os.environ.get("DB_USER"),
+            password=os.environ.get("DB_PASS"),
+            host=os.environ.get("DB_HOST"),
+            port=os.environ.get("DB_PORT", "5432")
+        )
+    except Exception as e:
+        print(f"Error de conexión: {e}")
+        return None
+
+
+
 
 
 # Definir función de sesion como administrador 
@@ -54,30 +73,6 @@ def obtener_areas(cursor):
     except Exception as e:
         print("Error al obtener las áreas:", e)
         return []
-
-
-oracledb.init_oracle_client(config_dir=os.path.join("app", "wallet"))
-
-
-def obtener_conexion():
-    try:
-        
-        # Establecer conexión con la base de datos Oracle
-        connection = oracledb.connect(
-            user="sys",                 # Nombre de usuario
-            password="123",             # contraseña
-            dsn="CN=adb.sa-bogota-1.oraclecloud.com",    # cadena de conexión
-            mode=oracledb.AUTH_MODE_SYSDBA  # Incluir por que uso  SYS
-        )
-        print("Conexión exitosa a la base de datos.")
-        return connection
-
-    except oracledb.DatabaseError as e:
-        error, = e.args
-        print(f"Error al conectar con la base de datos: {error.message}")
-        return None
-
-
 
 
 
@@ -118,14 +113,13 @@ def entidad_admin():
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
     if request.method == 'POST':
-        
         # Obtén los valores del formulario
         nombre = request.form.get('nombre')
         apellido = request.form.get('apellido')
         email = request.form.get('email')
         clave = request.form.get('clave')
         rol = request.form.get('rol')
-        
+
         print(f"Datos recibidos: Nombre={nombre}, Apellido={apellido}, Email={email}, Clave={clave}, Rol={rol}")
 
         if not all([nombre, apellido, email, clave, rol]):
@@ -137,18 +131,15 @@ def registro():
                 return render_template('registro.html', error="No se pudo conectar a la base de datos.")
             
             cursor = connection.cursor()
+
+            # El id ya es SERIAL, no hace falta incluirlo
             query = """
-                INSERT INTO usuarios (id, nombre, apellido, email, clave, rol) 
-                VALUES (usuarios_seq.NEXTVAL, :nombre, :apellido, :email, :clave, :rol)
+                INSERT INTO usuarios (nombre, apellido, email, clave, rol) 
+                VALUES (%s, %s, %s, %s, %s)
             """
-            cursor.execute(query, {
-                'nombre': nombre,
-                'apellido': apellido,
-                'email': email,
-                'clave': clave,
-                'rol': rol
-            })
+            cursor.execute(query, (nombre, apellido, email, clave, rol))
             connection.commit()
+
             print("Usuario registrado exitosamente.")
             
             cursor.close()
@@ -161,7 +152,6 @@ def registro():
             return render_template('registro.html', error="Hubo un problema al registrar el usuario.")
         
     return render_template('registro.html')
-
 
 
 ## Función para que el usuario se pueda logear o registrar uno nuevo.
@@ -1098,11 +1088,75 @@ def eliminar_usuario_api(id):
             connection.close()
 
 
+## CREACION DE TABLAS EN POSTGREESQL
+
+def crear_tablas():
+    conexion = obtener_conexion()
+    if conexion is None:
+        print("No se pudo conectar a la base de datos para crear las tablas.")
+        return
+
+    try:
+        cursor = conexion.cursor()
+
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS area (
+            id_area SERIAL PRIMARY KEY,
+            nombre_area VARCHAR(100),
+            pared SMALLINT CHECK (pared IN (0, 1)),
+            suelo SMALLINT CHECK (suelo IN (0, 1)),
+            puerta SMALLINT CHECK (puerta IN (0, 1)),
+            ventana SMALLINT CHECK (ventana IN (0, 1)),
+            escritorio SMALLINT CHECK (escritorio IN (0, 1)),
+            mesas SMALLINT CHECK (mesas IN (0, 1)),
+            sillas SMALLINT CHECK (sillas IN (0, 1)),
+            sanitario SMALLINT CHECK (sanitario IN (0, 1)),
+            lavamanos SMALLINT CHECK (lavamanos IN (0, 1)),
+            casa SMALLINT CHECK (casa IN (0, 1)),
+            rodadero SMALLINT CHECK (rodadero IN (0, 1)),
+            biblioteca SMALLINT CHECK (biblioteca IN (0, 1)),
+            piscina_pelotas SMALLINT CHECK (piscina_pelotas IN (0, 1))
+        );
+        """)
+
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS limpieza (
+            id SERIAL PRIMARY KEY,
+            id_area INTEGER NOT NULL,
+            responsable VARCHAR(100) NOT NULL,
+            elemento VARCHAR(100) NOT NULL,
+            fue_limpio SMALLINT NOT NULL CHECK (fue_limpio IN (0, 1)),
+            fecha DATE NOT NULL,
+            observaciones VARCHAR(500),
+            CONSTRAINT fk_limpieza_area FOREIGN KEY (id_area) REFERENCES area(id_area) ON DELETE CASCADE
+        );
+        """)
+
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS usuarios (
+            id SERIAL PRIMARY KEY,
+            nombre VARCHAR(50),
+            apellido VARCHAR(50),
+            email VARCHAR(100),
+            clave VARCHAR(100),
+            rol VARCHAR(20)
+        );
+        """)
+
+        conexion.commit()
+        print("Tablas creadas correctamente.")
+        cursor.close()
+        conexion.close()
+
+    except Exception as e:
+        print(f"Error al crear las tablas: {e}")
 
 
 
 if __name__ == '__main__':
+    crear_tablas()
     app.run(debug=True)
+
 
 
 
