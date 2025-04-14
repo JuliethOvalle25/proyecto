@@ -1,5 +1,3 @@
-
-import oracledb
 from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 import datetime
 from datetime import date
@@ -41,7 +39,7 @@ def obtener_conexion():
 
 
 # Definir función de sesion como administrador 
-
+'''''
 def es_Administrador():
     return 'rol' in session and session['rol'] == 'Administrador'  # Verifica si el usuario está en sesión y si su rol es 'administrador'
 
@@ -74,7 +72,7 @@ def obtener_areas(cursor):
         print("Error al obtener las áreas:", e)
         return []
 
-
+'''
 
 ## PÁGINAS SIN FUNCIONALIDAD
 
@@ -156,7 +154,7 @@ def registro():
 
 ## Función para que el usuario se pueda logear o registrar uno nuevo.
 
-
+'''
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     
@@ -205,8 +203,9 @@ def login():
 
         return render_template('login.html')
 
+'''
 
-
+'''
 @app.route('/login_actual', methods=['GET', 'POST'])
 def login_actual():
     if 'email' in session:  # Si ya hay una sesión activa
@@ -238,10 +237,10 @@ def entidad():
 
     return render_template('entidad.html', areas=areas)
 
+'''
 
 
-
-
+''''
 @app.route('/crear_area', methods=['GET', 'POST'])
 def crear_area():
     
@@ -320,8 +319,9 @@ def crear_area():
     # Si el método es GET, renderizar el template de creación de área
     return render_template('crear_area.html')
 
+'''
 
-
+'''''
 
 @app.route('/gestion_area')
 def gestion_area():
@@ -360,7 +360,9 @@ def gestion_area():
     return render_template('gestion_area.html', columns=columns, rows=rows)
 
 
+'''
 
+''''
 
 @app.route('/eliminar_area/<int:id_area>', methods=['POST'])
 def eliminar_area(id_area):
@@ -387,10 +389,10 @@ def eliminar_area(id_area):
 
     return redirect(url_for('gestion_area'))
 
+'''
 
 
-
-
+'''''
 @app.route('/areas/empleado')
 def lista_areas_empleado():
     # Verifica si el usuario está logueado y es un empleado
@@ -415,10 +417,10 @@ def lista_areas_empleado():
     return render_template('empleado_areas.html', areas=areas)
 
 
-
+'''
 # Establecer el cursor para devolver diccionarios
 
-
+'''''
 @app.route('/editar_area/<int:id_area>', methods=['GET', 'POST'])
 def editar_area(id_area):
     connection = obtener_conexion()
@@ -533,14 +535,15 @@ def editar_area(id_area):
 
         return render_template('editar_area.html', area=area, elementos=elementos)
 
-
+'''
 
 
 
 ### Empleado areas
 from flask import Flask, render_template, request, redirect, url_for, session
 from datetime import datetime
-import oracledb
+
+'''''
 
 @app.route('/empleado/areas', methods=['GET', 'POST'])
 def empleado_areas():
@@ -647,8 +650,10 @@ def empleado_areas():
         connection.close()
 
 
-
+'''
 ## REPORTES LIMPIEZA 
+
+'''''
 
 @app.route('/reportes', methods=['GET'])
 def reportes():
@@ -710,12 +715,12 @@ def reportes():
         connection.close()
 
     return render_template('reportes.html', reportes_agrupados=reportes_agrupados)
-
+'''
 
 
 ## GENERAR REPORTES EN PDF 
 
-
+'''''
 from datetime import datetime
 from datetime import date 
 from reportlab.pdfgen import canvas
@@ -810,10 +815,10 @@ def generar_pdf():
         mimetype="application/pdf",
         headers={"Content-Disposition": "attachment;filename=reporte_limpieza.pdf"}
     )
-
+'''
 ## GESTIÓN USUARIO
 
-
+'''''
 @app.route('/gestion_usuario')
 def gestion_usuario():
     # Usar la función de conexión externa para obtener la conexión a la base de datos
@@ -857,7 +862,12 @@ def eliminar_usuario(id):
     # Redirigir a la página donde se visualizan los registros
     return redirect(url_for('gestion_usuario'))
 
+'''
 
+
+
+
+'''''
 @app.route('/editar_usuario/<int:id>', methods=['GET', 'POST'])
 def editar_usuario(id):
     # Lógica para obtener y actualizar al usuario
@@ -901,12 +911,12 @@ def editar_usuario(id):
 
         return redirect(url_for('gestion_usuario'))
 
-
+'''
 
 
 ### APIs
 
-
+'''''
   # API para crear un usuario 
   
 @app.route('/api/registro', methods=['POST'])
@@ -960,13 +970,13 @@ def registro_usuario():
     except Exception as e:
         print(f"Error al registrar el usuario: {e}")
         return jsonify({"message": "Hubo un problema al registrar el usuario."}), 500
-
+'''
 
 
 
 # OBTENER USUARIOS 
 
-
+'''''
 @app.route('/api/usuarios', methods=['GET'])
 def obtener_usuarios():
     try:
@@ -1004,11 +1014,12 @@ def obtener_usuarios():
             cursor.close()
         if 'connection' in locals() and connection:
             connection.close()
-
+'''
 
 
 
 # ACTUALIZAR USUARIO 
+'''''
 
 @app.route('/api/usuarios/<int:id>', methods=['PUT'])
 def actualizar_usuario(id):
@@ -1056,10 +1067,10 @@ def actualizar_usuario(id):
         if 'connection' in locals() and connection:
             connection.close()
 
-        
+        '''
         
 # ELIMINAR USUARIO 
-
+'''''
 @app.route('/api/usuarios/<int:id>', methods=['DELETE'])
 def eliminar_usuario_api(id):
     try:
@@ -1086,7 +1097,7 @@ def eliminar_usuario_api(id):
             cursor.close()
         if 'connection' in locals() and connection:
             connection.close()
-
+'''
 
 ## CREACION DE TABLAS EN POSTGREESQL
 
