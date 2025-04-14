@@ -172,6 +172,15 @@ def registro():
     return render_template('registro.html')
 
 
+## Login
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    
+       
+        return render_template('login.html')
+
+
 
 ## CREACION DE TABLAS EN POSTGREESQL
 
