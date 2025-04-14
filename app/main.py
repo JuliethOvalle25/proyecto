@@ -181,7 +181,12 @@ def login():
         return render_template('login.html')
 
 
+## logout
 
+@app.route('/logout')
+def logout():
+    
+    return redirect(url_for('login'))
 ## CREACION DE TABLAS EN POSTGREESQL
 
 def crear_tablas():
