@@ -349,7 +349,7 @@ def empleado_areas():
         cursor.execute("SELECT id_area, nombre_area FROM area")
         areas = cursor.fetchall()
 
-        fecha_actual = datetime.today().strftime('%Y-%m-%d')
+        fecha_actual = datetime.now().strftime('%Y-%m-%d')
 
         if request.method == 'GET':
             id_area = request.args.get('id_area')
