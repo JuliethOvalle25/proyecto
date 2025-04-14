@@ -28,15 +28,24 @@ app.secret_key = 'mi_clave_secreta_segura'
 
 def obtener_conexion():
     try:
-        return psycopg2.connect(
+        print("📡 Intentando conectar a la base de datos PostgreSQL...")
+        print("🔍 DB_HOST:", os.environ.get("DB_HOST"))
+        print("🔍 DB_USER:", os.environ.get("DB_USER"))
+        print("🔍 DB_NAME:", os.environ.get("DB_NAME"))
+        print("🔍 DB_PORT:", os.environ.get("DB_PORT"))
+        
+        conn = psycopg2.connect(
             dbname="rayitos",
             user=os.environ.get("DB_USER"),
             password=os.environ.get("DB_PASS"),
-            host=os.environ.get("DB_HOST"),
+            host="dpg-cvu6e0qdbo4c739eo8ng-a.oregon-postgres.render.com",
             port=os.environ.get("DB_PORT", "5432")
         )
+
+        print("✅ Conexión establecida.")
+        return conn
     except Exception as e:
-        print(f"Error de conexión: {e}")
+        print("❌ Error de conexión:", str(e))
         return None
 
 
