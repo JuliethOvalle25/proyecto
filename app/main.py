@@ -19,7 +19,13 @@ print("✅ DB_HOST cargado:", os.environ.get("DB_HOST"))
 
 # Crear la aplicación Flask
 
-app = Flask(__name__, template_folder="app/templates", static_folder="app/static")
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+app = Flask(
+    __name__,
+    template_folder=os.path.join(basedir, 'templates'),
+    static_folder=os.path.join(basedir, 'static')
+)
 # Clave secreta     
 app.secret_key = 'mi_clave_secreta_segura'
 
